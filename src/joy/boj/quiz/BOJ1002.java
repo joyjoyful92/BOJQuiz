@@ -56,14 +56,20 @@ public class BOJ1002 {
                 continue;
             }
 
-            int a = (int) (Math.pow(x2[i] - x1[i], 2) + Math.pow(y2[i] - y1[i], 2));
-            int b = (int) (Math.pow(r1[i] + r2[i], 2));
-            if ( a == b ) {
-                // 2. 1점에서 만나는 경우
+            // 원의 성질 파악 필요
+            // 1. 밖에서 만나지않음 : r1 + r2 < d
+            // 2. 밖에서 1점에서 만남 : r1 + r2 = d
+            // 3. 2점에서 만남 : |r2 - r1| < d < r1 + r2
+            // 4. 안에서 1점에서 만남 : |r2 - r1| = d
+            // 5. 안에서 만나지 않음 : |r2 - r1| > d
+            double d = Math.sqrt(Math.pow(x2[i] - x1[i], 2) + Math.pow(y2[i] - y1[i], 2));
+            int plus = r1[i] + r2[i];
+            int minus = Math.abs(r2[i] - r1[i]);
+
+            if ( plus == d || minus == d ) {
                 System.out.println(1);
                 continue;
-            } else if ( a < b ) {
-                // 3. 2점에서 만나는 경우
+            } else if ( minus < d && d < plus ) {
                 System.out.println(2);
                 continue;
             }
