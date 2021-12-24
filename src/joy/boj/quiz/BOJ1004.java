@@ -20,11 +20,13 @@ package joy.boj.quiz;
 // 1 ≤ n ≤ 50
 // 좌표와 반지름은 모두 정수
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BOJ1004 {
-    int x1, y1, x2, y2, n; // 출발점, 도착점, 행성개수
-    int[] cx, cy, r; // 각행성의 중점, 반지름
+    int T; // 테스트케이스 개수
+    int[] x1, y1, x2, y2, n; // 출발점, 도착점, 행성개수 (t개)
+    int[][] cx, cy, r; // 각행성의 중점, 반지름 (t개, n개)
 
     public void runQuiz() {
         dataScan();
@@ -34,12 +36,60 @@ public class BOJ1004 {
     void dataScan() {
         // 입력, 문제에 없는 system.out 은 하지 말것
         Scanner sc = new Scanner(System.in);
-//        this.A = sc.nextInt();
-//        this.B = sc.nextInt();
+        this.T = sc.nextInt();
+
+        this.x1 = new int[this.T];
+        this.y1 = new int[this.T];
+        this.x2 = new int[this.T];
+        this.y2 = new int[this.T];
+        this.n  = new int[this.T];
+
+        this.cx = new int[this.T][];
+        this.cy = new int[this.T][];
+        this.r  = new int[this.T][];
+
+        for ( int i = 0; i < this.T; i++ ) {
+            this.x1[i] = sc.nextInt();
+            this.y1[i] = sc.nextInt();
+            this.x2[i] = sc.nextInt();
+            this.y2[i] = sc.nextInt();
+            this.n[i] = sc.nextInt();
+
+            this.cx[i] = new int[this.n[i]];
+            this.cy[i] = new int[this.n[i]];
+            this.r[i] = new int[this.n[i]];
+
+            for ( int j = 0; j < this.n[i]; j++ ) {
+                this.cx[i][j] = sc.nextInt();
+                this.cy[i][j] = sc.nextInt();
+                this.r[i][j] = sc.nextInt();
+            }
+        }
+
         sc.close(); // stream close 필수 -> runtime error 발생시킴
     }
 
     void getResult() {
-//        System.out.println(this.A + this.B);
+        for ( int i = 0; i < this.T; i++ ) {
+            int sOut = 0, eIn = 0;
+            ArrayList<Integer> exist = new ArrayList<>();
+
+            for ( int j = 0; j < this.n[i]; j++ ) {
+                if ( Math.pow(this.x1[i] - this.cx[i][j], 2) + Math.pow(this.y1[i] - this.cy[i][j], 2) < Math.pow(this.r[i][j], 2) ) {
+                    sOut++;
+                    exist.add(j);
+                }
+
+                if ( Math.pow(this.x2[i] - this.cx[i][j], 2) + Math.pow(this.y2[i] - this.cy[i][j], 2) < Math.pow(this.r[i][j], 2) ) {
+                    // 이미 존재하는 경우 (같은 원 내에 있는 경우)
+                    if ( exist.contains(j) )
+                        eIn--;
+                    else
+                        eIn++;
+                }
+            }
+
+            System.out.println(sOut + eIn);
+        }
     }
 }
