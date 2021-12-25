@@ -41,12 +41,12 @@ public class BOJ1005 {
     void dataScan() {
         // 입력, 문제에 없는 system.out 은 하지 말것
         Scanner sc = new Scanner(System.in);
-        this.A = sc.nextInt();
-        this.B = sc.nextInt();
+//        this.A = sc.nextInt();
+//        this.B = sc.nextInt();
         sc.close(); // stream close 필수 -> runtime error 발생시킴
     }
 
     void getResult() {
-        System.out.println(this.A + this.B);
+//        System.out.println(this.A + this.B);
     }
 }
