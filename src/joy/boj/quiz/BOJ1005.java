@@ -32,7 +32,7 @@ import java.util.Scanner;
 public class BOJ1005 {
     Scanner sc = new Scanner(System.in);
     int N, K, P; // 건물 개, 건설순서 규칙의 개수, 건설해야 할 건물 번호
-    int[] D, inDegree; // 건물 별 건설 시간
+    int[] D, inDegree, result; // 건물 별 건설 시간
     ArrayList<Integer>[] graph; // 건설순서
 
     public void runQuiz() {
@@ -49,7 +49,6 @@ public class BOJ1005 {
 
     void dataScan() {
         // 입력, 문제에 없는 system.out 은 하지 말것
-        Scanner sc = new Scanner(System.in);
         this.N = sc.nextInt(); // 건물 수
         this.K = sc.nextInt(); // 건물 순서 규칙 수
 
@@ -76,6 +75,7 @@ public class BOJ1005 {
 
     void getResult() {
         // indegree 계산
+        this.result = new int[this.N + 1];
         this.inDegree = new int[this.N + 1];
         for ( int i = 1; i <= this.N; i++ ) {
             for ( int n : graph[i] ) {
@@ -83,6 +83,26 @@ public class BOJ1005 {
             }
         }
 
+        // 시작점 찾기 (indegree 가 0 인 경우)
         Deque<Integer> que = new LinkedList<>();
+        for ( int i = 1; i <= this.N; i++ ) {
+            if ( this.inDegree[i] == 0 ) {
+                que.add(i);
+                this.result[i] = this.D[i];
+            }
+        }
+
+        // 결과 세팅
+        while ( !que.isEmpty() ) {
+            int node = que.poll();
+
+            for ( int child : this.graph[node] ) {
+                this.inDegree[child]--;
+                if ( this.inDegree[child] == 0 ) que.add(child);
+                this.result[child] = Math.max(this.result[child], this.result[node] + this.D[child]);
+            }
+        }
+
+        System.out.println(this.result[this.P]);
     }
 }
