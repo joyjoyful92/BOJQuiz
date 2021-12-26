@@ -25,28 +25,64 @@ package joy.boj.quiz;
 // 0 ≤ Di ≤ 100,000, Di는 정수
 
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class BOJ1005 {
-    int T;
-    int[] N, K; // 건물 개, 건설순서 규칙의 개수
-    int[][] D; // 건물 별 건설 시간
+    Scanner sc = new Scanner(System.in);
+    int N, K, P; // 건물 개, 건설순서 규칙의 개수, 건설해야 할 건물 번호
+    int[] D, inDegree; // 건물 별 건설 시간
     ArrayList<Integer>[] graph; // 건설순서
 
     public void runQuiz() {
-        dataScan();
-        getResult();
+        int T = sc.nextInt();
+
+        while ( T > 0 ) {
+            T--;
+            dataScan();
+            getResult();
+        }
+
+        sc.close();
     }
 
     void dataScan() {
         // 입력, 문제에 없는 system.out 은 하지 말것
         Scanner sc = new Scanner(System.in);
-//        this.A = sc.nextInt();
-//        this.B = sc.nextInt();
+        this.N = sc.nextInt(); // 건물 수
+        this.K = sc.nextInt(); // 건물 순서 규칙 수
+
+        // 건물 별 건설 시간
+        this.D = new int[this.N + 1];
+        for ( int i = 1; i <= this.N; i++ ) {
+            this.D[i] = sc.nextInt();
+        }
+
+        // 건물 건설 순서
+        this.graph = new ArrayList[this.N + 1];
+        for ( int i = 1; i <= this.N; i++ ) {
+            this.graph[i] = new ArrayList<>();
+        }
+        for ( int i = 1; i <= this.K; i++ ) {
+            int x = sc.nextInt();
+            this.graph[x].add(sc.nextInt());
+        }
+
+        this.P = sc.nextInt(); // 건설할 건물 번호
+
         sc.close(); // stream close 필수 -> runtime error 발생시킴
     }
 
     void getResult() {
-//        System.out.println(this.A + this.B);
+        // indegree 계산
+        this.inDegree = new int[this.N + 1];
+        for ( int i = 1; i <= this.N; i++ ) {
+            for ( int n : graph[i] ) {
+                this.inDegree[n]++;
+            }
+        }
+
+        Deque<Integer> que = new LinkedList<>();
     }
 }
