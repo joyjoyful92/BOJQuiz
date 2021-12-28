@@ -39,12 +39,12 @@ public class BOJ1005 {
         int T = sc.nextInt();
 
         while ( T > 0 ) {
-            T--;
             dataScan();
             getResult();
+            T--;
         }
 
-        sc.close();
+        sc.close(); // stream close 필수 -> runtime error 발생시킴
     }
 
     void dataScan() {
@@ -69,8 +69,6 @@ public class BOJ1005 {
         }
 
         this.P = sc.nextInt(); // 건설할 건물 번호
-
-        sc.close(); // stream close 필수 -> runtime error 발생시킴
     }
 
     void getResult() {
@@ -83,7 +81,7 @@ public class BOJ1005 {
             }
         }
 
-        // 시작점 찾기 (indegree 가 0 인 경우)
+        // 시작점 찾기 ( 가 0 인 경우)
         Deque<Integer> que = new LinkedList<>();
         for ( int i = 1; i <= this.N; i++ ) {
             if ( this.inDegree[i] == 0 ) {
