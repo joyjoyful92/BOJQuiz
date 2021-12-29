@@ -25,9 +25,8 @@ import java.util.Scanner;
 
 public class BOJ1006 {
     Scanner sc = new Scanner(System.in);
-    int N, K, P; // 건물 개, 건설순서 규칙의 개수, 건설해야 할 건물 번호
-    int[] D, inDegree, result; // 건물 별 건설 시간
-    ArrayList<Integer>[] graph; // 건설순서
+    int N, W; // 구역개수/2, 소대 수
+    int[] enemy; // 적군의 수(1~N, N+1~2N) - 최대 적의 수는 소대원 수보다 적거나같음
 
     public void runQuiz() {
         int T = sc.nextInt();
@@ -43,58 +42,18 @@ public class BOJ1006 {
 
     void dataScan() {
         // 입력, 문제에 없는 system.out 은 하지 말것
-        this.N = sc.nextInt(); // 건물 수
-        this.K = sc.nextInt(); // 건물 순서 규칙 수
+        this.N = sc.nextInt(); // 구역개수/2
+        this.W = sc.nextInt(); // 소대 수
 
-        // 건물 별 건설 시간
-        this.D = new int[this.N + 1];
-        for ( int i = 1; i <= this.N; i++ ) {
-            this.D[i] = sc.nextInt();
+        // 적군의 수
+        this.enemy = new int[this.N + 1];
+        // 1~2N
+        for ( int i = 1; i <= this.N * 2; i++ ) {
+            this.enemy[i] = sc.nextInt();
         }
-
-        // 건물 건설 순서
-        this.graph = new ArrayList[this.N + 1];
-        for ( int i = 1; i <= this.N; i++ ) {
-            this.graph[i] = new ArrayList<>();
-        }
-        for ( int i = 1; i <= this.K; i++ ) {
-            int x = sc.nextInt();
-            this.graph[x].add(sc.nextInt());
-        }
-
-        this.P = sc.nextInt(); // 건설할 건물 번호
     }
 
     void getResult() {
-        // indegree 계산
-        this.result = new int[this.N + 1];
-        this.inDegree = new int[this.N + 1];
-        for ( int i = 1; i <= this.N; i++ ) {
-            for ( int n : graph[i] ) {
-                this.inDegree[n]++;
-            }
-        }
-
-        // 시작점 찾기 ( 가 0 인 경우)
-        Deque<Integer> que = new LinkedList<>();
-        for ( int i = 1; i <= this.N; i++ ) {
-            if ( this.inDegree[i] == 0 ) {
-                que.add(i);
-                this.result[i] = this.D[i];
-            }
-        }
-
-        // 결과 세팅
-        while ( !que.isEmpty() ) {
-            int node = que.poll();
-
-            for ( int child : this.graph[node] ) {
-                this.inDegree[child]--;
-                if ( this.inDegree[child] == 0 ) que.add(child);
-                this.result[child] = Math.max(this.result[child], this.result[node] + this.D[child]);
-            }
-        }
-
-        System.out.println(this.result[this.P]);
+        System.out.println();
     }
 }
