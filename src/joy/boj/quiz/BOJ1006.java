@@ -25,8 +25,10 @@ import java.util.Scanner;
 
 public class BOJ1006 {
     Scanner sc = new Scanner(System.in);
-    int N, W; // 구역개수/2, 소대 수
+    int N, W; // 구역개수/2, 부대 당 소대원 수
     int[] enemy; // 적군의 수(1~N, N+1~2N) - 최대 적의 수는 소대원 수보다 적거나같음
+    boolean[] selected;
+    int resultCnt;
 
     public void runQuiz() {
         int T = sc.nextInt();
@@ -43,17 +45,31 @@ public class BOJ1006 {
     void dataScan() {
         // 입력, 문제에 없는 system.out 은 하지 말것
         this.N = sc.nextInt(); // 구역개수/2
-        this.W = sc.nextInt(); // 소대 수
+        this.W = sc.nextInt(); // 부대 당 소대원 수
 
         // 적군의 수
         this.enemy = new int[this.N + 1];
+        this.selected = new boolean[this.N + 1];
         // 1~2N
         for ( int i = 1; i <= this.N * 2; i++ ) {
             this.enemy[i] = sc.nextInt();
         }
+
+        this.resultCnt = 0;
     }
 
     void getResult() {
+        for ( int i = 1; i <= this.N; i++ ) {
+            // 인접구역 +1, -1, +n
+            // 처음, 마지막인 경우
+            // 1. 오른쪽 구역
+            int rightArea = i % this.N == 0 ? ((i / this.N) - 1) * this.N + 1 : i + 1;
+//            int leftArea = ;
+//            int topArea = ;
+//            int bottomArea = ;
+//            if ( this.enemy[i] + this.enemy )
+        }
+
         System.out.println();
     }
 }
