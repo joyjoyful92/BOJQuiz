@@ -18,9 +18,6 @@ package joy.boj.quiz;
 // 출력
 // 각 테스트케이스에 대해서 한 줄에 하나씩 원타곤의 모든 구역을 커버하기 위해 침투 시켜야 할 특수 소대의 최소 개수를 출력하시오.
 
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 public class BOJ1006 {
@@ -48,8 +45,8 @@ public class BOJ1006 {
         this.W = sc.nextInt(); // 부대 당 소대원 수
 
         // 적군의 수
-        this.enemy = new int[this.N + 1];
-        this.selected = new boolean[this.N + 1];
+        this.enemy = new int[this.N * 2 + 1];
+        this.selected = new boolean[this.N * 2 + 1];
         // 1~2N
         for ( int i = 1; i <= this.N * 2; i++ ) {
             this.enemy[i] = sc.nextInt();
@@ -59,17 +56,38 @@ public class BOJ1006 {
     }
 
     void getResult() {
-        for ( int i = 1; i <= this.N; i++ ) {
-            // 인접구역 +1, -1, +n
-            // 처음, 마지막인 경우
-            // 1. 오른쪽 구역
-            int rightArea = i % this.N == 0 ? ((i / this.N) - 1) * this.N + 1 : i + 1;
-//            int leftArea = ;
-//            int topArea = ;
-//            int bottomArea = ;
-//            if ( this.enemy[i] + this.enemy )
+        for ( int i = 1; i <= this.N * 2; i++ ) {
+            if ( !selected[i] ) {
+                this.selected[i] = true; // 담당구역배정 완료
+
+                // 인접구역 index
+                int[] nearIdx = {
+                        i % this.N == 1 ? ((i / this.N) + 1) * this.N : i - 1,
+                        i + this.N,
+                        i % this.N == 0 ? ((i / this.N) - 1) * this.N + 1 : i + 1,
+                        i - this.N
+                }; // left, top, right, bottom
+
+                int curMax = this.enemy[i];
+                int addIdx = 0;
+                for (int idx : nearIdx) {
+                    if (idx >= 1 && idx <= this.N * 2) {
+                        int curSum = this.enemy[i] + this.enemy[idx];
+                        if (!this.selected[idx] && curSum <= this.W && curMax <= curSum) {
+                            curMax = curSum;
+                            addIdx = idx;
+                        }
+                    }
+                }
+
+                if ( addIdx != 0 ) {
+                    this.selected[addIdx] = true;
+                }
+
+                this.resultCnt++;
+            }
         }
 
-        System.out.println();
+        System.out.println(this.resultCnt);
     }
 }
