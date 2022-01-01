@@ -90,4 +90,8 @@ public class BOJ1006 {
 
         System.out.println(this.resultCnt);
     }
+
+    void dfs(int idx) {
+
+    }
 }
