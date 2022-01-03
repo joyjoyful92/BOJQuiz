@@ -43,6 +43,7 @@ public class BOJ1009 {
         int cnt = 1;
         while (true) {
             int curRemain = (int) (Math.pow(a, cnt++) % 10);
+            curRemain = curRemain == 0 ? 10 : curRemain;
 
             if ( resultList.contains(curRemain) ) break;
 
