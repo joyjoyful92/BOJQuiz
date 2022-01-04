@@ -42,6 +42,7 @@ public class BOJ1010 {
         System.out.println(this.total);
     }
 
+    // 시간초과
     void dfs(int cnt, int idx) {
         if ( cnt == this.N ) this.total++;
         if ( cnt < this.N && idx < this.M ) {
