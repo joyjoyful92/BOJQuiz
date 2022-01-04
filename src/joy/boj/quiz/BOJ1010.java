@@ -11,12 +11,11 @@ package joy.boj.quiz;
 // 출력
 // 각 테스트 케이스에 대해 주어진 조건하에 다리를 지을 수 있는 경우의 수를 출력한다.
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BOJ1010 {
     Scanner sc = new Scanner(System.in);
-    int N, M;
+    int N, M, total;
     boolean[] selected;
 
     public void runQuiz() {
@@ -37,15 +36,19 @@ public class BOJ1010 {
     }
 
     void getResult() {
+        this.total = 0;
         this.selected = new boolean[this.M];
-        dfs(0);
+        dfs(0, 0);
+        System.out.println(this.total);
     }
 
-    void dfs(int cnt) {
-        if ( cnt == this.M ) {
-            return;
-        } else {
-            dfs(cnt + 1);
+    void dfs(int cnt, int idx) {
+        if ( cnt == this.N ) this.total++;
+        if ( cnt < this.N && idx < this.M ) {
+            this.selected[idx] = true;
+            dfs(cnt + 1, idx + 1);
+            this.selected[idx] = false;
+            dfs(cnt, idx + 1);
         }
     }
 }
