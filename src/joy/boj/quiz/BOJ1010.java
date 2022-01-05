@@ -17,10 +17,12 @@ public class BOJ1010 {
     Scanner sc = new Scanner(System.in);
     int N, M, total;
     boolean[] selected;
+    int[][] res;
 
     public void runQuiz() {
         int T = sc.nextInt();
 
+        setDynamicData();
         while ( T > 0 ) {
             dataScan();
             getResult();
@@ -36,10 +38,27 @@ public class BOJ1010 {
     }
 
     void getResult() {
-        this.total = 0;
-        this.selected = new boolean[this.M];
-        dfs(0, 0);
-        System.out.println(this.total);
+//        this.total = 0;
+//        this.selected = new boolean[this.M];
+//        dfs(0, 0);
+//        System.out.println(this.total);
+
+        System.out.println(this.res[this.M][this.N]);
+    }
+
+    void setDynamicData() {
+        this.res = new int[30 + 1][30 + 1];
+        for ( int i = 1; i <= 30; i++ ) {
+            for ( int j = 1; j <= i; j++ ) {
+                if ( j == 1 ) {
+                    this.res[i][j] = i;
+                } else if ( i == j ) {
+                    this.res[i][j] = 1;
+                } else {
+                    this.res[i][j] = this.res[i - 1][j - 1] + this.res[i - 1][j];
+                }
+            }
+        }
     }
 
     // 시간초과
