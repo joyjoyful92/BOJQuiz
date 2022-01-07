@@ -14,15 +14,18 @@ package joy.boj.quiz;
 // 출력
 // 첫째 줄에 패턴을 출력하면 된다.
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BOJ1032 {
     Scanner sc = new Scanner(System.in);
+    int T;
     String[] files;
     StringBuffer sb;
 
     public void runQuiz() {
+        this.T = sc.nextInt();
+        this.files = new String[T];
+
         dataScan();
         getResult();
 
@@ -30,17 +33,30 @@ public class BOJ1032 {
     }
 
     void dataScan() {
-        int T = sc.nextInt();
-        this.files = new String[T];
-
-        for ( int i = 0; i < T; i++ ) {
-            this.files[i] = sc.nextLine();
+        for ( int i = 0; i < this.T; i++ ) {
+            this.files[i] = sc.next();
         }
     }
 
     void getResult() {
         sb = new StringBuffer();
-        sb.append("test");
+
+        if ( this.T > 0 ) {
+            for (int i = 0; i < this.files[0].length(); i++) {
+                char current = this.files[0].charAt(i);
+                for ( int j = 0; j < this.T; j++ ) {
+                    if ( current != this.files[j].charAt(i) ) {
+                        sb.append("?");
+                        break;
+                    }
+
+                    if ( j == this.T - 1 ) {
+                        sb.append(current);
+                    }
+                }
+            }
+        }
+
         System.out.println(sb);
     }
 }
