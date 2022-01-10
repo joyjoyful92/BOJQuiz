@@ -39,27 +39,20 @@ public class BOJ1051 {
         for ( int i = 0; i < this.N; i++ ) {
             for ( int j = 0; j < this.M; j++ ) {
                 int cur = this.list[i].charAt(j);
-                int width;
-                int height;
+                int dist;
                 int weight = 1;
 
                 // 현재 이후 값이 있는지 확인
-                if ( j + 1 < this.M ) {
-                    for ( int k = j + 1; k < this.M; k++ ) {
-                        if ( cur == this.list[i].charAt(k) ) {
-                            width = k - j + 1;
+                for ( int k = (j + 1 < this.M)? j + 1: j; k < this.M; k++ ) {
+                    if ( cur == this.list[i].charAt(k) ) {
+                        dist = k - j;
 
-                            if ( i + 1 < this.N ) {
-                                for ( int l = i + 1; l < this.N; l++ ) {
-                                    if ( cur == this.list[l].charAt(j) && cur == this.list[l].charAt(k) ) {
-                                        height = l - i + 1;
-                                        weight = Math.max(weight, width * height);
-                                    }
-                                }
-                            }
+                        if ( i + dist < this.N && cur == this.list[i + dist].charAt(j) && cur == this.list[i + dist].charAt(k) ) {
+                            weight = Math.max(weight, (int) Math.pow(dist + 1, 2));
                         }
                     }
                 }
+
                 maxWeight = Math.max(maxWeight, weight);
             }
         }
