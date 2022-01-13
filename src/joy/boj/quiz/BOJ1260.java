@@ -37,7 +37,10 @@ public class BOJ1260 {
         }
 
         for ( int i = 0; i < this.M; i++ ) {
-            this.graph[sc.nextInt()].add(sc.nextInt());
+            int s = sc.nextInt(); // starting point
+            int d = sc.nextInt(); // destination
+            this.graph[s].add(d);
+            this.graph[d].add(s);
         }
     }
 
@@ -62,6 +65,9 @@ public class BOJ1260 {
     }
 
     void bfs(int x) {
+        this.visited[x] = true;
+        System.out.print(x + " ");
+
         Queue<Integer> que = new LinkedList<>();
         que.addAll(this.graph[x]); // 초기값 세팅
 
