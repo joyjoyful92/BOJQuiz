@@ -42,6 +42,12 @@ public class BOJ1260 {
             this.graph[s].add(d);
             this.graph[d].add(s);
         }
+
+        // 정렬 - 작은 번호 순서대로
+        for ( int i = 1; i <= this.N; i++ ) {
+            ArrayList<Integer> list = this.graph[i];
+            Collections.sort(list);
+        }
     }
 
     void getResult() {
