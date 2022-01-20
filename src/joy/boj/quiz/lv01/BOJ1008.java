@@ -1,4 +1,4 @@
-package joy.boj.quiz;
+package joy.boj.quiz.lv01;
 
 // <A/B>
 // 문제

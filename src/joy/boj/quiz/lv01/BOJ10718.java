@@ -1,4 +1,4 @@
-package joy.boj.quiz;
+package joy.boj.quiz.lv01;
 
 // <We love kriii>
 // 문제

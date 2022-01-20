@@ -53,4 +53,32 @@ public class BOJ1009 {
         int idx = b % resultList.size() == 0 ? resultList.size() : b % resultList.size();
         System.out.println(resultList.get(idx - 1));
     }
+
+    public static class BOJ10872 {
+        Scanner sc = new Scanner(System.in);
+        int N;
+
+        public void runQuiz() {
+            dataScan();
+            getResult();
+
+            sc.close(); // stream close 필수 -> runtime error 발생시킴
+        }
+
+        void dataScan() {
+            this.N = sc.nextInt();
+        }
+
+        void getResult() {
+            System.out.println(reculsive(this.N));
+        }
+
+        int reculsive(int n) {
+            if ( n <= 1 ) {
+                return 1;
+            } else {
+                return n * reculsive(n - 1);
+            }
+        }
+    }
 }
