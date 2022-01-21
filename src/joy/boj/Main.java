@@ -8,10 +8,15 @@ package joy.boj;
 // test 했던 class import 는 제외하고 올릴 것
 
 import joy.boj.quiz.lv02.BOJ14681;
+import joy.boj.test.q1;
+import joy.boj.test.q2;
+import joy.boj.test.q3;
 
 public class Main {
     public static void main(String[] args) {
-        BOJ14681 answer = new BOJ14681();
-        answer.runQuiz();
+//        BOJ14681 answer = new BOJ14681();
+//        answer.runQuiz();
+        q3 q = new q3();
+        q3.run();
     }
 }
