@@ -1,7 +1,6 @@
 package joy.boj.test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -17,8 +16,8 @@ public class q3 {
         }
 
         Collections.sort(arr);
-        for ( int i = 0; i < arr.size(); i++ ) {
-            System.out.print(arr.get(i) + " ");
+        for (Integer integer : arr) {
+            System.out.print(integer + " ");
         }
     }
 }

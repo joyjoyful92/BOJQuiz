@@ -24,6 +24,8 @@ package joy.boj.quiz.lv02;
 첫째 줄에 상근이가 창영이의 방법을 사용할 때, 설정해야 하는 알람 시간을 출력한다. (입력과 같은 형태로 출력하면 된다.)
 */
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 public class BOJ2884 {
@@ -45,8 +47,14 @@ public class BOJ2884 {
     }
 
     void getResult() {
-        int res = 1;
+        Date date = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.HOUR_OF_DAY, this.H);
+        cal.set(Calendar.MINUTE, this.M);
 
-        System.out.println(res);
+        cal.add(Calendar.MINUTE, -45);
+
+        System.out.println(cal.get(Calendar.HOUR_OF_DAY) + " " + cal.get(Calendar.MINUTE));
     }
 }

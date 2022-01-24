@@ -1,4 +1,4 @@
-package joy.boj.quiz;
+package joy.boj.quiz.lv24;
 
 // <DFS와 BFS>
 // 문제

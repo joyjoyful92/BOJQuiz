@@ -1,4 +1,4 @@
-package joy.boj.quiz;
+package joy.boj.quiz.lv24;
 
 // <다리놓기>
 // 문제
