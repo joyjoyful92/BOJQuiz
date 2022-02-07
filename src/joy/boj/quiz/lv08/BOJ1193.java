@@ -24,35 +24,35 @@ X가 주어졌을 때, X번째 분수를 구하는 프로그램을 작성하시�
 
 import java.util.Scanner;
 
- public class BOJ1193 {
-     Scanner sc;
-     int N;
+public class BOJ1193 {
+    Scanner sc;
+    int N;
 
-     public void runQuiz() {
-         sc = new Scanner(System.in);
+    public void runQuiz() {
+        sc = new Scanner(System.in);
 
-         dataScan();
-         getResult();
+        dataScan();
+        getResult();
 
-         sc.close(); // stream close 필수 -> runtime error 발생시킴
-     }
+        sc.close(); // stream close 필수 -> runtime error 발생시킴
+    }
 
-     void dataScan() {
+    void dataScan() {
          this.N = sc.nextInt();
      }
 
-     void getResult() {
-         int cnt = 1;
+    void getResult() {
+        int cnt = 1,  curMin = 1, sum;
 
-         if ( this.N != 1 ) {
-            int bfrMax, curMax = 1;
+        while ( this.N >= curMin ) {
+            curMin += cnt++;
+        }
 
-            while ( this.N > curMax ) {
-                bfrMax = curMax;
-                curMax = bfrMax + cnt++;
-            }
-         }
+        sum = curMin - this.N;
 
-         System.out.println(cnt);
-     }
- }
+        if ( cnt % 2 == 0 )
+            System.out.println(sum + "/" + (cnt - sum));
+        else
+            System.out.println((cnt - sum) + "/" + sum);
+    }
+}
