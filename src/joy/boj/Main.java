@@ -7,11 +7,11 @@ package joy.boj;
 
 // test 했던 class import 는 제외하고 올릴 것
 
-import joy.boj.quiz.lv08.BOJ1193;
+import joy.boj.quiz.lv08.BOJ2869;
 
 public class Main {
     public static void main(String[] args) {
-        BOJ1193 answer = new BOJ1193();
+        BOJ2869 answer = new BOJ2869();
         answer.runQuiz();
     }
 }
