@@ -12,13 +12,11 @@ M이상 N이하의 소수를 모두 출력하는 프로그램을 작성하시오
 한 줄에 하나씩, 증가하는 순서대로 소수를 출력한다.
 */
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BOJ1929 {
     Scanner sc;
     int M, N;
-    ArrayList<Integer> list = new ArrayList<>();
 
     public void runQuiz() {
         sc = new Scanner(System.in);
