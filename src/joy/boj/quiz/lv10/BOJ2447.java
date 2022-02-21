@@ -25,6 +25,7 @@ public class BOJ2447 {
     Scanner sc = new Scanner(System.in);
     int N;
     String[] stars;
+    boolean[][] starsFlag;
 
     public void runQuiz() {
         dataScan();
@@ -35,20 +36,24 @@ public class BOJ2447 {
 
     void dataScan() {
         this.N = sc.nextInt();
-        this.stars = new String[this.N + 1];
+//        this.stars = new String[this.N];
+//
+//        for ( int i = 0; i < this.N; i++ ) {
+//            this.stars[i] = "";
+//        }
 
-        for ( int i = 0; i < this.N; i++ ) {
-            this.stars[i] = "";
-        }
+        this.starsFlag = new boolean[this.N][this.N];
     }
 
     void getResult() {
 //        recursive(this.N, true, 0);
-        recursive2(this.N, 0, 0);
+//        recursive2(this.N, 0, 0);
+//
+//        for ( int i = 0; i < this.N; i++ ) {
+//            System.out.println(this.stars[i]);
+//        }
 
-        for ( int i = 0; i < this.N; i++ ) {
-            System.out.println(this.stars[i]);
-        }
+        getStars();
     }
 
     // timeout
@@ -70,6 +75,7 @@ public class BOJ2447 {
         }
     }
 
+    // timeout
     void recursive2(int n, int w, int h) {
         if ( n == 1 ) {
             this.stars[w] += "*";
@@ -90,6 +96,34 @@ public class BOJ2447 {
             for ( int j = h; j < h + n; j++ ) {
                 this.stars[i] += " ";
             }
+        }
+    }
+
+    // timeout
+    void getStars() {
+        int len = this.N;
+        while ( len > 1 ) {
+            for  ( int i = 0; i < this.N; i++ ) {
+                for ( int j = 0; j < this.N; j++ ) {
+                    if ( !this.starsFlag[i][j]
+                            && len / 3 <= i % len && i % len < len / 3 * 2
+                            && len / 3 <= j % len && j % len < len / 3 * 2 )
+                        this.starsFlag[i][j] = true;
+                }
+            }
+
+            len /= 3;
+        }
+
+        for ( boolean[] stars : this.starsFlag ) {
+            for ( int i = 0; i < this.starsFlag.length; i++ ) {
+                if ( !stars[i] ) {
+                    System.out.print("*");
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
         }
     }
 }
