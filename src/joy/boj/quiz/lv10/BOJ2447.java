@@ -62,7 +62,7 @@ public class BOJ2447 {
                     boolean nextShow = false;
                     if ( show )
                         nextShow = i != 1 || j != 1;
-                    recursive(n / 3, nextShow, i + (iIdx * n / 3));
+                    recursive(n / 3, nextShow, iIdx + (i * (n / 3)));
                 }
             }
         }
