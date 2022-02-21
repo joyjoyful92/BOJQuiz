@@ -24,7 +24,7 @@ import java.util.Scanner;
 public class BOJ2447 {
     Scanner sc = new Scanner(System.in);
     int N;
-    String[][] stars;
+    String[] stars;
 
     public void runQuiz() {
         dataScan();
@@ -35,26 +35,35 @@ public class BOJ2447 {
 
     void dataScan() {
         this.N = sc.nextInt();
-        this.stars = new String[this.N][this.N];
+        this.stars = new String[this.N + 1];
+
+        for ( int i = 0; i < this.N; i++ ) {
+            this.stars[i] = "";
+        }
     }
 
     void getResult() {
-        getStars(this.N);
-    }
+        recursive(this.N, true, 0);
 
-    void getStars(int n) {
-        for ( int i = 0; i < 3; i++ ) {
-            for ( int j = 0; j < 3; j++ ) {
-                recursive(this.N, i != 2 || j != 2);
-            }
+        for ( int i = 0; i < this.N; i++ ) {
+            System.out.println(this.stars[i]);
         }
-
     }
 
-    void recursive(int n, boolean show) {
-        for ( int i = 0; i < 3; i++ ) {
-            for ( int j = 0; j < 3; j++ ) {
-                recursive(this.N, i != 2 || j != 2);
+    void recursive(int n, boolean show, int iIdx) {
+        if ( n == 1 ) {
+            if ( show )
+                this.stars[iIdx] += "*";
+            else
+                this.stars[iIdx] += " ";
+        } else {
+            for ( int i = 0; i < 3; i++ ) {
+                for ( int j = 0; j < 3; j++ ) {
+                    boolean nextShow = false;
+                    if ( show )
+                        nextShow = i != 1 || j != 1;
+                    recursive(n / 3, nextShow, i + (iIdx * n / 3));
+                }
             }
         }
     }
