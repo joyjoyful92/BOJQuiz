@@ -43,13 +43,15 @@ public class BOJ2447 {
     }
 
     void getResult() {
-        recursive(this.N, true, 0);
+//        recursive(this.N, true, 0);
+        recursive2(this.N, 0, 0);
 
         for ( int i = 0; i < this.N; i++ ) {
             System.out.println(this.stars[i]);
         }
     }
 
+    // timeout
     void recursive(int n, boolean show, int iIdx) {
         if ( n == 1 ) {
             if ( show )
@@ -64,6 +66,29 @@ public class BOJ2447 {
                         nextShow = i != 1 || j != 1;
                     recursive(n / 3, nextShow, iIdx + (i * (n / 3)));
                 }
+            }
+        }
+    }
+
+    void recursive2(int n, int w, int h) {
+        if ( n == 1 ) {
+            this.stars[w] += "*";
+        } else {
+            for ( int i = 0; i < 3; i++ ) {
+                for ( int j = 0; j < 3; j++ ) {
+                    if ( j == 1 && i == 1 )
+                        addSpace(n / 3, w + (i * (n / 3)), h + (j * (n / 3)));
+                    else
+                        recursive2(n / 3, w + (i * (n / 3)), h + (j * (n / 3)));
+                }
+            }
+        }
+    }
+
+    void addSpace(int n, int w, int h) {
+        for ( int i = w; i < w + n; i++ ) {
+            for ( int j = h; j < h + n; j++ ) {
+                this.stars[i] += " ";
             }
         }
     }
