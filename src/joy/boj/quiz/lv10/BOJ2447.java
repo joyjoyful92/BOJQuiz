@@ -36,22 +36,22 @@ public class BOJ2447 {
 
     void dataScan() {
         this.N = sc.nextInt();
-//        this.stars = new String[this.N];
-//
-//        for ( int i = 0; i < this.N; i++ ) {
-//            this.stars[i] = "";
-//        }
+        this.stars = new String[this.N];
+
+        for ( int i = 0; i < this.N; i++ ) {
+            this.stars[i] = "";
+        }
 
         this.starsFlag = new boolean[this.N][this.N];
     }
 
     void getResult() {
-//        recursive(this.N, true, 0);
-//        recursive2(this.N, 0, 0);
-//
-//        for ( int i = 0; i < this.N; i++ ) {
-//            System.out.println(this.stars[i]);
-//        }
+        recursive(this.N, true, 0);
+        recursive2(this.N, 0, 0);
+
+        for ( int i = 0; i < this.N; i++ ) {
+            System.out.println(this.stars[i]);
+        }
 
         getStars();
     }
